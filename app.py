@@ -4,19 +4,22 @@ import model
 import sys
 import logging
 import json
+import os
 
 import msal
 from fastapi import FastAPI
 import requests
+import uvicorn
 
 #"RD3@daltontofoli1gmail.onmicrosoft.com"
 #"RD#D1g1t4l"
 
 api = FastAPI()
 
+
 app = msal.ClientApplication(
-    app_config.CLIENT_ID, authority=app_config.AUTHORITY,
-    client_credential=app_config.CLIENT_SECRET
+    os.getenv("CLIENT_ID"), authority=os.getenv("AUTHORITY"),
+    client_credential=os.getenv("CLIENT_SECRET")
 )
 
 @api.post("/auth/")
